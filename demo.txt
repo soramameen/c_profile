@@ -1,0 +1,72 @@
+ソートなしデータ
+1,The Bridge,1845-11-2,14 Seafield Road Longman Inverness,SEN Unit 2.0 Open
+3,Bower Primary School,1908-1-19,Bowermadden Bower Caithness,01955 641225 Primary 25 2.6 Open
+4,Canisbay Primary School,1928-7-5,Canisbay Wick,01955 611337 Primary 56 3.5 Open
+2,Castletown Primary School,1913-11-4,Castletown Thurso,01847 821256 01847 821256 Primary 137 8.5 Open
+5,Crossroads Primary School,1893-2-24,Dunnet Thurso,01847 851629 01847 851629 Primary 29 2.4 Open
+
+ソート済みデータ
+1,The Bridge,1845-11-2,14 Seafield Road Longman Inverness,SEN Unit 2.0 Open
+2,Bower Primary School,1908-1-19,Bowermadden Bower Caithness,01955 641225 Primary 25 2.6 Open
+3,Canisbay Primary School,1928-7-5,Canisbay Wick,01955 611337 Primary 56 3.5 Open
+4,Castletown Primary School,1913-11-4,Castletown Thurso,01847 821256 01847 821256 Primary 137 8.5 Open
+5,Crossroads Primary School,1893-2-24,Dunnet Thurso,01847 851629 01847 851629 Primary 29 2.4 Open
+
+ソート済み重複idデータ
+1,The Bridge,1845-11-2,14 Seafield Road Longman Inverness,SEN Unit 2.0 Open
+2,Bower Primary School,1908-1-19,Bowermadden Bower Caithness,01955 641225 Primary 25 2.6 Open
+2,Canisbay Primary School,1928-7-5,Canisbay Wick,01955 611337 Primary 56 3.5 Open
+3,Castletown Primary School,1913-11-4,Castletown Thurso,01847 821256 01847 821256 Primary 137 8.5 Open
+5,Crossroads Primary School,1893-2-24,Dunnet Thurso,01847 851629 01847 851629 Primary 29 2.4 Open
+
+int binary_search(int id) {
+    int left = 0;
+    int right = profile_data_nitems - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+     
+        if (profile_data_store[mid].id == id) {
+            return mid;
+        }
+     
+        else if (profile_data_store[mid].id < id) {
+            left = mid + 1;
+        }
+ 
+        else {
+            right = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
+
+int is_sorted() {
+    int i = 0;
+    for (i = 0; i < profile_data_nitems-1; i++){
+        if(profile_data_store[i].id > profile_data_store[i+1].id){
+            printf("このデータはソートされていません\n");
+            return 0;
+        }
+      
+    }
+    return 1;
+}
+void binary(int id){
+    printf("binarysearchを行います\n");
+    if (is_sorted()) {
+        int result = 0;
+        result = binary_search(id);
+        if(result == -1) {
+            printf("このidを持つprofileは存在しません\n");
+        }
+        else{
+            printf("二分探索法によってこのidを持つものが見つかりました\n");
+            print_profile(profile_data_store[result]);
+        }
+        
+    }
+}
